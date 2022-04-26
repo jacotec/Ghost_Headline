@@ -17,21 +17,10 @@
     <div class="gh-site">
         <header id="gh-head" class="gh-head gh-outer">
             <div class="gh-head-inner gh-inner">
-                {{#if @site.description}}
-                    <a class="gh-head-description" href="{{@site.url}}">{{@site.description}}</a>
-                {{/if}}
 
                 <div class="gh-head-brand">
                     <a class="gh-head-logo" href="{{@site.url}}">
-                        {{#if @site.logo}}
-                            <img src="{{@site.logo}}" alt="{{@site.title}}">
-
-                            {{#if @custom.white_publication_logo_for_transparent_header}}
-                                <img src="{{@custom.white_publication_logo_for_transparent_header}}" alt="{{@site.title}}">
-                            {{/if}}
-                        {{else}}
-                            {{@site.title}}
-                        {{/if}}
+                        <img src="{{@site.url}}/content/images/HeaderLogo.png" alt="{{@site.title}}">
                     </a>
                     <button class="gh-burger"></button>
                 </div>
