@@ -5,9 +5,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{meta_title}}</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&family=Inter:wght@400;500;600;700;800&display=swap">
     <link rel="stylesheet" href="{{asset "built/screen.css"}}">
 
     {{ghost_head}}
@@ -30,39 +27,32 @@
                 </nav>
 
                 <div class="gh-head-actions">
-                    {{#unless @member}}
-                        <a class="gh-head-btn gh-btn gh-primary-btn" href="#/portal/signup" data-portal="signup">Abonnieren</a>
-                    {{else}}
-                        <a class="gh-head-btn gh-btn" href="#/portal/account" data-portal="account">Konto</a>
-                    {{/unless}}
+                    <button class="gh-search gh-icon-btn" data-ghost-search>{{> "icons/search"}}</button>
+                    {{#if @site.members_enabled}}
+                        {{#unless @member}}
+                            <a class="gh-head-btn gh-btn gh-primary-btn" href="#/portal/signup" data-portal="signup">Abonnieren</a>
+                        {{else}}
+                            <a class="gh-head-btn gh-btn" href="#/portal/account" data-portal="account">Konto</a>
+                        {{/unless}}
+                    {{/if}}
                 </div>
             </div>
         </header>
-
-        {{!-- {{navigation}} --}}
 
         {{{body}}}
 
         <footer class="gh-foot gh-outer">
             <div class="gh-foot-inner gh-inner">
-                {{^if @member.paid}}
+                {{#if @site.members_enabled}}
+                {{#unless @member}}
                     <section class="gh-subscribe">
-                        {{^if @member}}
-                            <h4 class="gh-subscribe-title">Abonniere {{@site.title}}</h3>
-
-                            {{#if @custom.email_signup_text}}
-                                <div class="gh-subscribe-description">{{@custom.email_signup_text}}</div>
-                            {{/if}}
-
-                            <button class="gh-subscribe-btn gh-btn" data-portal="signup">{{> "icons/email"}} Jetzt abonnieren</button>
-                        {{else}}
-                            <h3 class="gh-subscribe-title">Bis Du fertig für unlimitierten Zugriff?</h3>
-
-                            <div class="gh-subscribe-description">Kaufe ein bezahltes Abonnement um Zugriff auf den gesamten Inhalt zu bekommen.</div>
-
-                            <button class="gh-subscribe-btn gh-btn" data-portal="account/plans">Jetzt upgraden</button>
+                        <h3 class="gh-subscribe-title">Abonniere {{@site.title}}</h3>
+                        {{#if @custom.email_signup_text}}
+                            <div class="gh-subscribe-description">{{@custom.email_signup_text}}</div>
                         {{/if}}
+                        <button class="gh-subscribe-btn gh-btn" data-portal="signup">{{> "icons/email"}} Subscribe now</button>
                     </section>
+                {{/unless}}
                 {{/if}}
 
                 <nav class="gh-foot-menu">
@@ -81,7 +71,7 @@
     </div>
 
     {{#is "post, page"}}
-        {{> pswp}}
+        {{> "pswp"}}
     {{/is}}
 
     <script src="{{asset "built/main.min.js"}}"></script>
